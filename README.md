@@ -4,18 +4,20 @@
 
 Overview
 ---
+In this project, I will use the tools about computer version to identify lane lines on the road. I will develop a pipeline on a series of individual images, and later apply the result to a video stream (really just a series of images).
 
 The project
 ---
 The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
-* Reflect on your work in a written report
+* Reflect on my work
 
 
+
+
+
+Reflection
 ---
-
-### Reflection
-
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
 My pipeline consisted of 6 steps. 
