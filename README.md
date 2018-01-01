@@ -6,6 +6,7 @@ Overview
 ---
 In this project, I will use the tools about computer version to identify lane lines on the road. I will develop a pipeline on a series of individual images, and later apply the result to a video stream (really just a series of images).
 
+
 The project
 ---
 The goals / steps of this project are the following:
@@ -13,13 +14,19 @@ The goals / steps of this project are the following:
 * Reflect on my work
 
 
-
-
-
-Reflection
+Ideas for Lane Detection Pipeline
 ---
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+Some OpenCV functions I have used for this project are:
 
+cv2.inRange() for color selection
+cv2.fillPoly() for regions selection
+cv2.line() to draw lines on an image given endpoints
+cv2.addWeighted() to coadd / overlay two images cv2.cvtColor() to grayscale or change color cv2.imwrite() to output images to file
+cv2.bitwise_and() to apply a mask to an image
+
+
+Build a Lane Finding Pipeline
+---
 My pipeline consisted of 6 steps. 
 
 1. Converted the images to grayscale from RGB model 
@@ -33,12 +40,34 @@ My pipeline consisted of 6 steps.
 
 5. Anothe core operation: hough transform edges to a set of lines represent by start point and end point. Hough transform get the image of lane lines we want.
 
-6. Finally, we add the lane lines image and innitial image together. 
+6. Finally, we add the lane lines image and innitial image together.
+
+
+Test on images
+---
+
+
+Test on videos
+---
+You know what's cooler than drawing lanes over images? Drawing lanes over video!
+
+We can test our solution on two provided videos:
+
+`solidWhiteRight.mp4`
+
+`solidYellowLeft.mp4`
+
+
+Improved lane finding pipeline
+---
+At this point, I have the Hough line segments drawn onto the road, but what about identifying the full extent of the lane and marking it clearly as in the example video (P1_example.mp4)? Therefore I will improved my pipeline to do this. 
 
 
 
 
-### 2. Identify potential shortcomings with your current pipeline
+Reflection
+---
+### 1. Identify potential shortcomings with your current pipeline
 
 
 One potential shortcoming would be my pipeline can't find lane lines exactly when there are too much sonshine or cross of light. Cause in grayscale model of the image, too many useless edges will be find as edges of lane lines by canny detection. Therefore, the real lane lines can't be divided from the noise edges by hough transform, which cause serious result.
@@ -48,7 +77,7 @@ Another shortcoming could be there are too many paraments have to be turn, maybe
 And my pipeline cost too much time, which can not adapt to the real car running fast. 
 
 
-### 3. Suggest possible improvements to your pipeline
+### 2. Suggest possible improvements to your pipeline
 
 A possible improvement would be to find a more efficient and robust way to detect lane lines. Color space can be used to study how to find white and yellow more efficiently, and the way to fit lane lines can be update by polynomial.
 
