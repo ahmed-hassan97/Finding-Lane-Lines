@@ -2,6 +2,17 @@
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 
+[//]: # (Image References)
+[image1]: ./test_images_output/origin.jpg "origin"
+[image2]: ./test_images_output/gray.jpg "gray"
+[image3]: ./test_images_output/blur.jpg "blur"
+[image4]: ./test_images_output/edges.jpg "edges"
+[image5]: ./test_images_output/roi.jpg "roi"
+[image6]: ./test_images_output/lines.jpg "lines"
+[image7]: ./test_images_output/result.jpg "result"
+
+
+
 Overview
 ---
 In this project, I will use the tools about computer version to identify lane lines on the road. I will develop a pipeline on a series of individual images, and later apply the result to a video stream (really just a series of images).
@@ -28,20 +39,20 @@ cv2.bitwise_and() to apply a mask to an image
 Build a Lane Finding Pipeline
 ---
 My pipeline consisted of 6 steps. 
+![alt text][image1]
 
 1. Converted the images to grayscale from RGB model 
-    ![avatar][lanelines.jpg]
-    [image1](/examples/grayscale.jpg) "Grayscale"
+![alt text][image2]
 2. Use cv2.GaussianBlur() to blur the image
-
+![alt text][image3]
 3. The first core operation: detect edges of a gray model image
-
+![alt text][image4]
 4. After the edges have been got, my next step is to define a region of interest(i.e., ROI), this method is old but efficient. Cause the camere installed on the car is fixed, so the lane lines is in a specific region, usually a trapezoid.
-
+![alt text][image5]
 5. Anothe core operation: hough transform edges to a set of lines represent by start point and end point. Hough transform get the image of lane lines we want.
-
+![alt text][image6]
 6. Finally, we add the lane lines image and innitial image together.
-
+![alt text][image7]
 
 Test on images
 ---
