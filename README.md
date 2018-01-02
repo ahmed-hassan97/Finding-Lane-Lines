@@ -12,7 +12,6 @@
 [image7]: ./test_images_output/result.jpg "result"
 
 
-
 Overview
 ---
 In this project, I will use the tools about computer version to identify lane lines on the road. I will develop a pipeline on a series of individual images, and later apply the result to a video stream (really just a series of images).
@@ -22,40 +21,49 @@ The project
 ---
 The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
+* Improve this pipeline
 * Reflect on my work
+
+
+### Dependencies
+This lab requires docker images:
+
+* [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
 
 
 Ideas for Lane Detection Pipeline
 ---
 Some OpenCV functions I have used for this project are:
 
-cv2.inRange() for color selection
-cv2.fillPoly() for regions selection
-cv2.line() to draw lines on an image given endpoints
-cv2.addWeighted() to coadd / overlay two images cv2.cvtColor() to grayscale or change color cv2.imwrite() to output images to file
-cv2.bitwise_and() to apply a mask to an image
+cv2.inRange() for color selection  
+cv2.fillPoly() for regions selection  
+cv2.line() to draw lines on an image given endpoints  
+cv2.addWeighted() to coadd / overlay two images cv2.cvtColor() to grayscale or change color cv2.imwrite() to output images to file  
+cv2.bitwise_and() to apply a mask to an image  
 
 
 Build a Lane Finding Pipeline
 ---
-My pipeline consisted of 6 steps. 
+Using the following image as example, my pipeline consisted of 6 steps. 
 ![alt text][image1]
 
 1. Converted the images to grayscale from RGB model 
-![alt text][image2]
-2. Use cv2.GaussianBlur() to blur the image
-![alt text][image3]
-3. The first core operation: detect edges of a gray model image
-![alt text][image4]
-4. After the edges have been got, my next step is to define a region of interest(i.e., ROI), this method is old but efficient. Cause the camere installed on the car is fixed, so the lane lines is in a specific region, usually a trapezoid.
-![alt text][image5]
-5. Anothe core operation: hough transform edges to a set of lines represent by start point and end point. Hough transform get the image of lane lines we want.
-![alt text][image6]
-6. Finally, we add the lane lines image and innitial image together.
-![alt text][image7]
+![alt text][image2]  
 
-Test on images
----
+2. Use cv2.GaussianBlur() to blur the image
+![alt text][image3]  
+
+3. The first core operation: detect edges of a gray model image
+![alt text][image4]  
+
+4. After the edges have been got, my next step is to define a region of interest(i.e., ROI), this method is old but efficient. Cause the camere installed on the car is fixed, so the lane lines is in a specific region, usually a trapezoid.
+![alt text][image5]  
+
+5. Anothe core operation: hough transform edges to a set of lines represent by start point and end point. Hough transform get the image of lane lines we want.
+![alt text][image6]  
+
+6. Finally, we add the lane lines image and innitial image together.
+![alt text][image7]  
 
 
 Test on videos
@@ -66,17 +74,19 @@ We can test our solution on two provided videos:
 
 `solidWhiteRight.mp4`
 
-`solidYellowLeft.mp4`
+`solidYellowLeft.mp4`  
+
+The result is in [test_videos_output](https://github.com/liferlisiqi/Finding-Lane-Lines/tree/master/test_videos_output): white.mp4 and yelloe.mp4.
 
 
 Improved lane finding pipeline
 ---
-At this point, I have the Hough line segments drawn onto the road, but what about identifying the full extent of the lane and marking it clearly as in the example video (P1_example.mp4)? Therefore I will improved my pipeline to do this. 
+At this point, I have the Hough line segments drawn onto the road, but what about identifying the full extent of the lane? Therefore I will improved my pipeline to do this. 
 
+The first step is to diveded the detected lines into left set and right set.
+Then in each line set, several special lines are choosen as basic to draw full line. 
 
-
-Challenge
----
+The result is in [test_videos_output](https://github.com/liferlisiqi/Finding-Lane-Lines/tree/master/test_videos_output): white_improved.mp4 and yellow_improved.mp4.
 
 
 Reflection
